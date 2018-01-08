@@ -56,7 +56,7 @@ public class DatapointManager {
 		dtp.setDate(LocalDateTime.now());
 		dtp.setTemperature(36.2);
 		dtp.setPressure(2.1);
-		dtp.setRevolutions(8000);
+		dtp.setRevolutions(8000.2);
 		
 		//close database connection
 		factory.close();

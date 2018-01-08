@@ -1,14 +1,18 @@
 package de.hftstuttgart.snarex.datapoint.source;
 
+import java.time.LocalDateTime;
+
 public class Datapoint {
 	private double temperature;
 	private double pressure;
 	private double revolutions;
+	LocalDateTime date;
 
 	public Datapoint() {
 	};
 
-	public Datapoint(double temperature, double pressure, double revolutions) {
+	public Datapoint(LocalDateTime date, double temperature, double pressure, double revolutions) {
+		this.date = LocalDateTime.now();
 		this.temperature = temperature;
 		this.pressure = pressure;
 		this.revolutions = revolutions;

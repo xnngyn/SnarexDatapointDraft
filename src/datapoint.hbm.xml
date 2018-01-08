@@ -4,13 +4,17 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="de.hftstuttgart.snarex.datapoint.source.Datapoint" table="DATAPOINT">
+	<class name="de.hftstuttgart.snarex.datapoint.source.Datapoint"
+		table="DATAPOINT">
 
 		<id name="id" type="int">
 			<column name="id" />
 			<generator class="identity" />
 		</id>
 
+		<property name="date" type="LocalDateTime">
+			<column name="date" />
+		</property>
 		<property name="temperature" type="double">
 			<column name="temperature" />
 		</property>
@@ -18,8 +22,9 @@
 			<column name="pressure" />
 		</property>
 		<property name="revolutions" type="double">
-			<column name ="revolutions"/>
+			<column name="revolutions" />
 		</property>
+
 
 
 	</class>

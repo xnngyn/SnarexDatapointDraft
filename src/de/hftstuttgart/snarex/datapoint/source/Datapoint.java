@@ -6,14 +6,14 @@ public class Datapoint {
 	private int id;
 	private double temperature;
 	private double pressure;
-	private double revolutions;
-	LocalDateTime date;
+	private long revolutions;
+	private LocalDateTime date;
 
 	public Datapoint() {
 	};
 
-	public Datapoint(LocalDateTime date, double temperature, double pressure, double revolutions) {
-		this.date = LocalDateTime.now();
+	public Datapoint(LocalDateTime date, double temperature, double pressure, long revolutions) {
+		this.date = date;
 		this.temperature = temperature;
 		this.pressure = pressure;
 		this.revolutions = revolutions;
@@ -53,7 +53,7 @@ public class Datapoint {
 		return revolutions;
 	}
 
-	public void setRevolutions(double revolutions) {
+	public void setRevolutions(long revolutions) {
 		this.revolutions = revolutions;
 	}
 

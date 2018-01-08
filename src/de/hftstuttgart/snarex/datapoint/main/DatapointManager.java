@@ -58,6 +58,14 @@ public class DatapointManager {
 		dtp.setPressure(2.1);
 		dtp.setRevolutions(8000.2);
 		
+		List<Datapoint> datapoints = getData();
+		System.out.println("------------------------------------");
+		System.out.print(String.format("%10s %10s %10s %10s %10s\n", "ID", "Date", "Temperature","Pressure","Revolutions"));
+		System.out.println("------------------------------------");
+		for (Datapoint myDtp : datapoints) {
+			System.out.println(myDtp);
+		}
+		System.out.println("------------------------------------");
 		//close database connection
 		factory.close();
 	}

@@ -1,1 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database properties -->
+		<property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+		<property name="hibernate.connection.url">jdbc:derby:datapointdb</property>
+		<property name="hibernate.connection.username">username</property>
+		<property name="hibernate.connection.password">password</property>
+
+		<!-- List of XML mapping files -->
+		<mapping resource="datapoint.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>

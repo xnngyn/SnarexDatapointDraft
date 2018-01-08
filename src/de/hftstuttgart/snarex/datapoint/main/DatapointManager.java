@@ -18,14 +18,8 @@ public class DatapointManager {
 
 	public static void main(String[] args) {
 
-		/* OPEN database connection */
-		try {
-			factory = new Configuration().configure().buildSessionFactory();
-			System.out.println("sessionFactory object created successfully. Connection to database is up.");
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
+		getConnection();
+		
 		/* CREATE, DELETE and READ values */
 		try {
 			/* generate random values */
@@ -40,6 +34,7 @@ public class DatapointManager {
 			 * }
 			 */
 
+			/* CREATE new object and SAVE the object */
 			/*
 			 * Datapoint dtp= new Datapoint(LocalDateTime.now(),30.2,2.1,8000.1); 
 			 * save(dtp);
@@ -59,12 +54,26 @@ public class DatapointManager {
 						myDtp.getRevolutions()));
 			}
 			System.out.println("---------------------------------------------------------------------------");
+			
 		} finally {
 			/* CLOSE database connection */
 			factory.close();
 		}
 	}
 
+	/* try CONNECT to database */
+	public static String getConnection() {
+		try {
+			factory = new Configuration().configure().buildSessionFactory();
+			System.out.println("sessionFactory object created successfully. Connection to database is up.");
+			String success = "Connection is up";
+			return success;
+		} catch (Throwable ex) {
+			System.err.println("Failed to create sessionFactory object." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+	
 	/* SAVE object in database/table */
 	public static void save(Datapoint datapoint) {
 		Session session = factory.openSession();

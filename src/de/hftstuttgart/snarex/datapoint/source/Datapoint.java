@@ -8,6 +8,7 @@ public class Datapoint {
 	private double pressure;
 	private double revolutions;
 	private LocalDateTime date;
+	
 
 	public Datapoint() {
 	};
@@ -21,8 +22,7 @@ public class Datapoint {
 	
 	@Override
 	public String toString() {
-
-		return String.format("%10d %10s %10f %10f %10f \n", id, date, temperature, pressure, revolutions );
+		return String.format("%10d %10s %10f %12f %15f \n", id, date, temperature, pressure, revolutions );
 	}
 
 	public int getId() {

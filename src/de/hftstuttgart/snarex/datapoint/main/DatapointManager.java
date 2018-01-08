@@ -1,11 +1,24 @@
 package de.hftstuttgart.snarex.datapoint.main;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import de.hftstuttgart.snarex.datapoint.source.Datapoint;
+
+
 
 public class DatapointManager {
 	static SessionFactory factory;
 
+	public static void save(Datapoint datapoint) {
+		Session session = factory.openSession();
+		session.beginTransaction();
+		session.save(datapoint);
+		session.getTransaction().commit();
+		session.close();
+	}
+	
 	public static void main(String[] args) {
 		try {
 			// open database connection

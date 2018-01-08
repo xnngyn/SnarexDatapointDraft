@@ -1,6 +1,6 @@
 package de.hftstuttgart.snarex.datapoint.main;
 
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,7 +10,11 @@ import org.hibernate.cfg.Configuration;
 import de.hftstuttgart.snarex.datapoint.source.Datapoint;
 
 public class DatapointManager {
+	// initialize session factory
 	static SessionFactory factory;
+
+	// date formatter
+	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	// save object in database/table
 	public static void save(Datapoint datapoint) {
@@ -42,7 +46,7 @@ public class DatapointManager {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// open database connection
 		try {
 			factory = new Configuration().configure().buildSessionFactory();
@@ -51,25 +55,34 @@ public class DatapointManager {
 			System.err.println("Failed to create sessionFactory object." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
-		
-		Datapoint dtp = new Datapoint();
-		dtp.setDate(LocalDateTime.now());
-		dtp.setTemperature(31.213);
-		dtp.setPressure(3.2);
-		dtp.setRevolutions(6000.2);
-		
-		save(dtp);
-		
-		List<Datapoint> datapoints = getData();
-		System.out.println("-------------------------------------------------------------------");
-		System.out.print(String.format("%10s %5s %30s %10s %15s\n", "ID", "Date", "Temperature","Pressure","Revolutions"));
-		System.out.println("-------------------------------------------------------------------");
-		for (Datapoint myDtp : datapoints) {
-			System.out.println(myDtp);
+
+		try {
+			/*
+			 * generate random values 
+			 * for(int i= 0; i<250;i++) { Random r = new Random();
+			 * double rTemperature = r.nextDouble()*100; double rPressure =
+			 * r.nextDouble()*10; double rRevolutions = r.nextDouble()*10000; Datapoint dtp1
+			 * = new Datapoint(LocalDateTime.now(),rTemperature,rPressure,rRevolutions);
+			 * save(dtp1); }
+			 */
+
+			// delete(1201);
+
+			List<Datapoint> datapoints = getData();
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.print(
+					String.format("%10s %5s %30s %10s %15s\n", "ID", "Date", "Temperature", "Pressure", "Revolutions"));
+			System.out.println("---------------------------------------------------------------------------");
+			for (Datapoint myDtp : datapoints) {
+				System.out.println(String.format("%10d %20s %9.2f %12.2f %15.2f \n", myDtp.getId(),
+						myDtp.getDate().format(formatter), myDtp.getTemperature(), myDtp.getPressure(),
+						myDtp.getRevolutions()));
+			}
+			System.out.println("---------------------------------------------------------------------------");
+		} finally {
+			// close database connection
+			factory.close();
 		}
-		System.out.println("-------------------------------------------------------------------");
-		//close database connection
-		factory.close();
 	}
 
 }

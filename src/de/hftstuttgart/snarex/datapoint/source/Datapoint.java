@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 
 public class Datapoint {
 	private int id;
+	private LocalDateTime date;
 	private double temperature;
 	private double pressure;
 	private double revolutions;
-	private LocalDateTime date;
+
 	
 
 	public Datapoint() {

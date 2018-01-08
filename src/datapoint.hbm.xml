@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 	<class name="de.hftstuttgart.snarex.datapoint.source.Datapoint"
-		table="DATAPOINT">
+		table="DATAPOINT1">
 
 		<id name="id" type="int">
 			<column name="id" />

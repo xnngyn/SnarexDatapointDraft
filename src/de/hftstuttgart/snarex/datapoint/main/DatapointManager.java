@@ -58,6 +58,8 @@ public class DatapointManager {
 		dtp.setPressure(2.1);
 		dtp.setRevolutions(8000.2);
 		
+		save(dtp);
+		
 		List<Datapoint> datapoints = getData();
 		System.out.println("------------------------------------");
 		System.out.print(String.format("%10s %10s %10s %10s %10s\n", "ID", "Date", "Temperature","Pressure","Revolutions"));

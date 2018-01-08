@@ -10,7 +10,8 @@ import de.hftstuttgart.snarex.datapoint.source.Datapoint;
 
 public class DatapointManager {
 	static SessionFactory factory;
-
+	
+	// save object in database/table
 	public static void save(Datapoint datapoint) {
 		Session session = factory.openSession();
 		session.beginTransaction();
@@ -18,6 +19,17 @@ public class DatapointManager {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	// delete object from database/table by id
+		public static void delete(int id) {
+			Session session = factory.openSession();
+			session.beginTransaction();
+			Datapoint dtp = new Datapoint();
+			dtp.setId(id);
+			session.delete(dtp);
+			session.getTransaction().commit();
+			session.close();
+		}
 	
 	public static void main(String[] args) {
 		try {

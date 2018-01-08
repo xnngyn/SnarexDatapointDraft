@@ -17,11 +17,12 @@ public class DatapointManager {
 	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	public static void main(String[] args) {
-
-		getConnection();
+		try {
+		
+			getConnection();
 		
 		/* CREATE, DELETE and READ values */
-		try {
+		
 			/* generate random values */
 			/*
 			 * for(int i= 0; i<250;i++) {
@@ -40,7 +41,7 @@ public class DatapointManager {
 			 * save(dtp);
 			 */
 			
-			// delete(1201);
+			// deleteByID(1101);
 			
 			/* PRINT values from database/table */
 			List<Datapoint> datapoints = getData();
@@ -55,36 +56,47 @@ public class DatapointManager {
 			}
 			System.out.println("---------------------------------------------------------------------------");
 			
-		} finally {
+		
+		
+		}finally {
 			/* CLOSE database connection */
 			factory.close();
 		}
 	}
 
 	/* try CONNECT to database */
-	public static String getConnection() {
+	public static boolean getConnection() {
+		boolean res = false;
 		try {
 			factory = new Configuration().configure().buildSessionFactory();
 			System.out.println("sessionFactory object created successfully. Connection to database is up.");
-			String success = "Connection is up";
-			return success;
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
+			return res = true;
+		} catch (Exception e) {
+			System.err.println("Failed to create sessionFactory object." + e);
+			return res;
 		}
 	}
 	
 	/* SAVE object in database/table */
-	public static void save(Datapoint datapoint) {
+	public static boolean save(Datapoint datapoint) {
+		boolean res = false;
+		try{
 		Session session = factory.openSession();
 		session.beginTransaction();
 		session.save(datapoint);
 		session.getTransaction().commit();
 		session.close();
+		return res = true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return res;
+		}
 	}
 
-	/* DELETE object from database/table by id */
-	public static void delete(int id) {
+	/* DELETE object by id from database/table by id */
+	public static boolean deleteByID(int id) {
+		boolean res = false;
+		try {
 		Session session = factory.openSession();
 		session.beginTransaction();
 		Datapoint dtp = new Datapoint();
@@ -92,6 +104,27 @@ public class DatapointManager {
 		session.delete(dtp);
 		session.getTransaction().commit();
 		session.close();
+		return res = true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return res;
+		}
+	}
+	
+	/* DELETE object by object from database/table by id */
+	public static boolean deleteByObject(Datapoint name) {
+		boolean res = false;
+		try {
+		Session session = factory.openSession();
+		session.beginTransaction();
+		session.delete(name);
+		session.getTransaction().commit();
+		session.close();
+		return res = true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return res;
+		}
 	}
 
 	/* GET/READ values from database/table */

@@ -4,15 +4,17 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.sql.ordering.antlr.Factory;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.hftstuttgart.snarex.datapoint.main.DatapointManager;
 import de.hftstuttgart.snarex.datapoint.source.Datapoint;
 
 public class databaseTest {
-
+	
 	Datapoint dtp = new Datapoint();
-
+	
 	@Test
 	public void testConnection() {
 		assertEquals(true, DatapointManager.getConnection());
